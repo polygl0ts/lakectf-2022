@@ -1,0 +1,6 @@
+services:
+  web:
+    container_name: calc-you-later
+    build: .
+    ports:
+      - "4600:3000"

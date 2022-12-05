@@ -1,0 +1,9 @@
+The aim of the game is to find a path that goes through all the nodes. 
+There are 2 types of nodes:
+ - The relay nodes faithfully forward the path according to your directions
+ - The other nodes deterministicly forward the path
+
+Every attempt (aka connection) has a random setup and a (fixed) time limit. 
+
+Level 0 and level 1 only differ in the size of the game
+

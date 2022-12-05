@@ -1,0 +1,22 @@
+author: Robin_Jadoul
+category: web
+connection_info: 'http://chall.polygl0ts.ch:4600'
+description: "Calc-You-Later, alligator.\n\n*Call /getflag and follow the instructions*"
+extra:
+  decay: 8
+  initial: 500
+  minimum: 50
+files:
+  - handout.zip
+flags:
+  - EPFL{https://youtu.be/ya2Sx8xmMpc#Because_why_not...}
+healthcheck:
+hints:
+
+
+name: Calc-You-Later
+tags:
+  - web
+type: dynamic
+value: 500
+version: 0.1

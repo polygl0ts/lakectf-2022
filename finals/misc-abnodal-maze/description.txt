@@ -1,0 +1,5 @@
+The nodes want to play hide-and-seek, can you figure out their routing rule and find them all? 
+All nodes are static and just forward stuff.
+
+Spaces between routing information please
+Level 0 (5600) and level 1 (5601) only differ in the size of the game 

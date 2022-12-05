@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Slowly waking up"
+python3 server.py

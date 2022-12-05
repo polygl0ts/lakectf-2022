@@ -1,0 +1,26 @@
+services:
+  redis:
+    container_name: redis-clob-mate
+    image: "redis:6-alpine"
+
+  web:
+    container_name: web-clob-mate
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    environment:
+      - FLAG=EPFL{W3_D0nT_H4v3_MaT3_4nyM0re__S0_H3reS_4_Fl4G_InST34d}
+    depends_on:
+      - redis
+    ports:
+      - "49000:8080"
+
+  bot:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.bot
+    depends_on:
+      - redis
+    deploy:
+      replicas: 3

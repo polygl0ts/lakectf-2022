@@ -1,0 +1,37 @@
+services:
+  nody-0:
+    build:
+      context: .
+      dockerfile: Dockerfile0
+    ports:
+      - 5600:5000
+    cap_drop:
+      - all
+    cap_add:
+      - chown
+      - setuid
+      - setgid
+      - sys_admin
+      - mknod
+    security_opt:
+      - apparmor=unconfined
+      - seccomp=unconfined
+
+  nody-1:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    ports:
+      - 5601:5000
+    cap_drop:
+      - all
+    cap_add:
+      - chown
+      - setuid
+      - setgid
+      - sys_admin
+      - mknod
+    security_opt:
+      - apparmor=unconfined
+      - seccomp=unconfined
+

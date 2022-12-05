@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/img/favicon.ico" />
+    <link rel="stylesheet" href="/static/css/elements.min.css" />
+    <link rel="stylesheet" href="/static/css/layout.css" />
+    <link rel="stylesheet" href="/static/css/about.css" />
+    <title>Lake's Hangout</title>
+    <style>
+      body {
+        background:linear-gradient( rgba(228, 227, 163, 0.5) 100%, rgba(228, 227, 163, 0.5)100%),url("https://upload.wikimedia.org/wikipedia/commons/1/17/Lake_Geneva_from_Chillon_Castle.jpg");
+  height: 100%;
+  background-position: center;
+  text-align: center;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-wrap;
+}
+    </style>
+  </head>
+  <body>
+    <h1>{{ post.title }}</h1><br/>
+    <p> {{ post.body }}</p><br/>
+    <p>By {{ post.author }}</p>
+    <form action="/report" method="post">
+      <input hidden type="text" name="path" value="/{{ post.post_id }}">
+      <input type="submit" value="report this post">
+    </form>
+  </body>
+</html>

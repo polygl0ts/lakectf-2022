@@ -1,0 +1,21 @@
+services:
+  # The challenge service
+  such-sections-runner:
+    image: lakectf-pwn-such-sections:latest
+    build:
+      context: .
+      platforms:
+        - linux/amd64
+    ports:
+      - 4700:5000
+    cap_drop:
+      - all
+    cap_add:
+      - chown
+      - setuid
+      - setgid
+      - sys_admin
+      - mknod
+    security_opt:
+      - apparmor=unconfined
+      - seccomp=unconfined

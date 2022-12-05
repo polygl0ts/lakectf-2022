@@ -1,0 +1,15 @@
+FROM python:3.9-slim
+
+RUN pip install poetry
+
+RUN adduser --system --group app
+
+USER app
+WORKDIR /app
+
+COPY poetry.lock pyproject.toml /app
+RUN poetry install --no-root
+
+COPY src/ /app/carboncredit_suisse/
+
+CMD [ "poetry", "run", "uvicorn", "--host", "0.0.0.0", "carboncredit_suisse:app"]

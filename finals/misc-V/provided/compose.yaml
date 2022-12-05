@@ -1,0 +1,13 @@
+services:
+  # The challenge service
+  V-server:
+    image: lakectf-v:latest
+    build:
+      context: .
+      platforms:
+        - linux/amd64
+    ports:
+      - target: 4900
+        host_ip: 0.0.0.0
+        published: 4900
+        protocol: udp

@@ -1,0 +1,346 @@
+\documentclass{minimal}
+\usepackage{tikz}
+\newcount\c
+\newcount\e
+\newcount\p 
+\newcount\np
+\newcount\uni
+\newcount\prevp
+\newcount\pprevp
+\newcount\sum
+\newcount\temp
+\newcount\ucount
+\newcount\on
+\newcount\musts
+\newcount\isOn
+\newcount\aOn
+\newcount\cOn
+\newcount\even
+\newcount\odd
+\newcount\rX
+\newcount\rValue
+\newcount\nX
+\newcount\nValue
+\newcount\lt
+\newcount\gt
+\newcount\eq 
+\newcount\m
+%==add_init==
+\newcount\nmem
+\newcount\ltmem
+\newcount\gtmem
+\newcount\eqmem
+%==mmem_init==
+\newcount\pmema
+\newcount\pmemb
+\newcount\pmemc
+\newcount\pmemd
+%==data_init==
+\newcommand{\step}{	
+	\ifodd\c
+		\multiply\c by 3
+		\advance\c by 1
+	\else
+		\divide\c by 2
+	\fi
+}
+\newcommand{\flag}{
+%==flag==
+}
+\newcommand{\verify}{
+	\ifnum\p=0%==resp== 
+	\else \err \fi
+	
+	\ifnum\ucount=0%==uctot==
+	\else \err \fi
+	
+	\ifnum\c=0%==c_end==
+	\else \err \fi
+	
+%==must_verif==
+	\ifnum\musts=0%==must_tot==
+	\else \err \fi
+	
+	\ifnum\e>0 \errmessage \fi
+}
+
+\newcommand{\err}{
+	\advance\e by 1
+}
+
+\newcommand{\eval}{
+	
+	\multiply\p by \np
+	\ifnum\c<5 \err \fi
+	
+	\ifnum\np=1
+	    \temp=1
+		\ifnum\ucount=0
+			\ifnum\c=203978920
+			\else
+				\err
+			\fi
+			\temp=0
+		\fi
+		
+		\ifnum\ucount=1
+			\ifnum\c=76492096
+			\else
+				\err
+			\fi
+			\ifnum\sum=123
+			\else 
+				\err 
+			\fi
+			\temp=0
+		\fi
+		
+		\ifnum\ucount=2
+			\ifnum\c=2390378
+			\else
+				\err
+			\fi
+			\ifnum\p=360
+			\else
+				\err
+			\fi
+			\temp=0
+		\fi
+		\ifnum\ucount=3
+			\ifnum\c=896392
+			\else
+				\err
+			\fi
+			\ifnum\isOn=0 \err \fi
+			\ifnum\sum=36
+			\else 
+				\err 
+			\fi
+			\temp=0
+		\fi
+		
+		\ifnum\ucount=4
+			\ifnum\c=47272
+			\else
+				\err
+			\fi
+			\ifnum\sum=25
+			\else 
+				\err 
+			\fi
+			\temp=0
+		\fi
+		
+		\ifnum\ucount=5
+			\ifnum\c=416
+			\else
+				\err
+			\fi
+			\ifnum\sum=14
+			\else 
+				\err 
+			\fi
+			\temp=0
+		\fi
+		
+		\ifnum\ucount=6
+		    \ifnum\c=52
+		    \else
+		        \err
+		    \fi
+		    \temp=0
+		\fi
+
+		\ifnum\temp>0 \err \fi
+		
+		\p=1
+		\isOn=1
+		\advance\ucount by 1
+	\else
+	
+	\sum=\np
+	\advance\sum by \prevp
+	\advance\sum by \pprevp
+	
+	\ifnum\c<0%==c_limit==
+		\ifnum\uni<96
+			\err
+		\fi
+		\ifnum\np<\prevp
+		\err
+		\fi
+	\else
+		\ifnum\c=725258376
+			\ifnum\np=29
+			\else
+				\err
+			\fi 
+		\fi
+		\ifnum\c<19123025
+			\ifnum\c>4780755
+				\ifnum\uni>96
+					\err 
+				\fi
+			\fi 
+		\fi
+	
+		\ifnum\c=0%==uni1==
+			\ifnum\uni=0%==char1==
+			\else \err
+			\fi 
+		\fi
+		\ifnum\c=0%==uni2==
+			\ifnum\uni=0%==char2==
+			\else \err
+			\fi 
+		\fi
+		
+%==position_check==
+		\ifnum\np=\prevp
+			\err
+		\fi
+		\ifnum\aOn=1
+				\ifnum\isOn=1
+			\else
+				\err
+			\fi
+		\fi
+		
+		\ifnum\even=1
+			\ifodd\c
+				\err
+			\fi
+		\fi 
+		\ifnum\odd=1
+			\ifodd\c 
+			\else
+				\err
+			\fi
+		\fi 
+		\ifnum\rX=1
+			\ifnum\rValue=\prevp
+			\else
+				\err
+			\fi
+		\fi
+	
+		\ifnum\isOn=1
+			\isOn=\cOn
+		\fi
+		
+		\ifnum\gtmem=1
+			\ifnum\prevp<\np
+				\err
+			\fi
+		\fi 
+		\ifnum\ltmem=1
+			\ifnum\prevp>\np
+				\err
+			\fi
+		\fi 
+		\ifnum\eqmem=1
+			\ifnum\np=\pprevp
+			\else
+				\err
+			\fi
+		\fi
+		\ifnum\nmem=0
+		\else
+			\ifnum\np=\nmem
+			\else
+				\err
+			\fi		
+		\fi
+		\ifnum\m>0
+			\must
+		\fi
+			
+	\fi 
+	\fi
+	
+	\pprevp=\prevp
+	\prevp=\np
+	
+	\cOn=0
+	\aOn=0
+	\even=0
+	\odd=0
+	\rX=0
+	\rValue=0
+	\ltmem=\lt
+	\gtmem=\gt
+	\lt=0
+	\gt=0
+	\eqmem=\eq 
+	\eq=0
+	\ifnum\nX=1
+		\nmem=\nValue
+	\else
+		\nmem=0
+	\fi
+	\nX=0
+	\nValue=0
+	\m=0
+	
+%==add_data==
+	
+	\step
+
+}
+
+\newcommand{\prep}{
+	
+	\c=0%==c==
+	\e=0
+	\p=1
+	
+	\np=0
+	\prevp=0
+	\pprevp=0
+	
+	\ucount=0
+	\musts=0
+	
+	\isOn=1
+	\cOn=0
+	\aOn=0
+	\even=0
+	\odd=0
+	\rX=0
+	\rValue=0
+	\lt=0
+	\gt=0
+	\eq=0
+	\nX=0
+	\nValue=0
+	\m=0
+	
+	\gtmem=0
+	\eqmem=0
+	\ltmem=0
+	\nmem=0
+%==add_set==
+%==data_set==
+%==mmem_set==
+	\pmema=-1
+	\pmemb=-1
+	\pmemc=-1
+	\pmemd=-1
+}
+
+\newcommand{\must}{
+%==must_incr==
+}
+
+%==text==
+
+\begin{document}
+	
+	\prep
+	
+	%Enter the work you need to send should be written here in the following format (character then eval). This would be the work "wtf" 
+%==body==
+	\verify
+	
+	\flag
+\end{document}

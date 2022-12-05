@@ -1,0 +1,22 @@
+ARG UBUNTU=jammy
+# Build the binary reproducably
+FROM ubuntu:$UBUNTU as abnodal
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends python3.10 
+
+FROM pwn.red/jail
+COPY --from=abnodal / /srv
+
+COPY run0 /srv/app/run
+COPY run.py /srv/app/run.py
+COPY utils.py /srv/app/utils.py
+COPY flag_lv0.txt /srv/app/flag_lv0.txt
+
+RUN chmod 755 /srv/app/run
+RUN chmod 755 /srv/app/run.py
+RUN chmod 755 /srv/app/utils.py
+RUN chmod 744 /srv/app/flag_lv0.txt
+
+ENV JAIL_TIME 70
+ENV JAIL_CONNS_PER_IP 5
+ 

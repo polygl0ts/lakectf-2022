@@ -1,0 +1,8 @@
+services:
+  bot:
+    container_name: fishback
+    build: .
+    environment: 
+      - FLAG
+    ports: 
+      - 1337:1337

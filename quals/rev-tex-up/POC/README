@@ -1,0 +1,4 @@
+You should only need to look into the unsolved .tex (and try to solve it). The python script is a basic version of what will run on remote, you will need it (but it does contain part of the solution hardcoded for the poc). The final version with be similar in structure albeit harder.
+Any feedback is welcome of course
+
+POC hint: You can print the value of counter \x with \the\x

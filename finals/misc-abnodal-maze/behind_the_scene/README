@@ -1,0 +1,7 @@
+solver.py solves the challenge
+rules.txt was something we considered giving out, but didn't in the end (I regret not doing so)
+nodes.py was used in designing the challenge
+The rule for all non relay nodes was to forward to destination = c + previous node, with c being a constant offset.
+My aim was to make players figure out the routing rule, and had several solves, but the challenge ended up being too guessy, and I'm sorry if you had a bad experience with it. 
+One mistake I did was severely underestimating how bad the connection would be, with some teams having 4 seconds of latency, while I had done my calculations with 1s
+

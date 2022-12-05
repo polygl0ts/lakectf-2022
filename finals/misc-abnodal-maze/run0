@@ -1,0 +1,3 @@
+#!/bin/sh
+/app/run.py 20 1 /app/flag_lv0.txt
+

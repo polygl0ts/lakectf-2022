@@ -1,0 +1,20 @@
+
+Find and remove \errmessage to make compile
+
+Find use of \c
+Use l113 and l98 to find length of input (55 chars)
+Use l115-180 to find all underscore positions
+Use l198 to find starting w
+Use l212-222 to find ab as group number
+Use l190-197 and primes and resp of letters to find key
+
+Use l134-143 (np) to find best, fixes all 3/e
+Use l144-154 (sum, isOn) and w even to get new
+Get all n, and t's
+1 fixed, n fixed 
+Use l123-132 (sum) to get the
+Use sum to get ie5 and in9
+Pidgeonhole principle for 7s7,ou7 and olo
+To not get overflow, can only use d
+=> password found
+

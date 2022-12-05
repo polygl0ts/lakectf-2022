@@ -1,0 +1,34 @@
+services:
+  # The challenge service
+  such-sections-runner:
+    image: lakectf-pwn-such-sections:latest
+    build:
+      context: .
+      platforms:
+        - linux/amd64
+    ports:
+      - 4700:5000
+    cap_drop:
+      - all
+    cap_add:
+      - chown
+      - setuid
+      - setgid
+      - sys_admin
+      - mknod
+    security_opt:
+      - apparmor=unconfined
+      - seccomp=unconfined
+  # Intermediate step in the challenge service builder that contains the binary
+  such-sections-builder:
+    image: lakectf-pwn-such-sections:build
+    build:
+      context: .
+      target: builder
+      platforms:
+        - linux/amd64
+    volumes:
+      - ./:/out
+    command: "cp /sections /out/sections"
+    deploy:
+      replicas: 0 # Don't start this container by default

@@ -1,0 +1,29 @@
+services:
+  redis:
+    container_name: redis-lakes-hangout
+    image: "redis:6-alpine"
+
+  web:
+    container_name: web-lakes-hangout
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    environment:
+      - FLAG=EPFL{Only_Fl4gS}
+      - adminToken=V3ryynIceAdmainToK3en
+    depends_on:
+      - redis
+    ports:
+      - "5500:8080"
+
+  bot:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.bot
+    environment:
+      - adminToken=V3ryynIceAdmainToK3en
+    depends_on:
+      - redis
+    deploy:
+      replicas: 5

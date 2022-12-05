@@ -1,0 +1,26 @@
+services:
+  redis:
+    container_name: redis
+    image: "redis:6-alpine"
+
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    environment:
+      - FLAG=EPFL{Th1s_C5P_byp4ss_1s_b4sed}
+    depends_on:
+      - redis
+    ports:
+      - "4000:8080"
+
+  bot:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.bot
+    depends_on:
+      - redis
+    deploy:
+      replicas: 3

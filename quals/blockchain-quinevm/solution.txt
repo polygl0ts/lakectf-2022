@@ -1,0 +1,24 @@
+// Simply ignore all calldata :)
+CODESIZE // size to copy    | 1 byte
+PUSH1 0  // offset          | 2 bytes
+DUP1     // destOffset      | 1 byte
+CODECOPY // Do it           | 1 byte
+
+CODESIZE // size            | 1 byte
+PUSH1 0  // offset          | 2 bytes
+RETURN   // Do it           | 1 byte
+// TOTAL: 9 bytes
+
+////////////////////////
+
+// Or even smaller (assuming no money sent :])
+CODESIZE
+CALLVALUE
+DUP2
+DUP2
+DUP1
+CODECOPY
+RETURN
+// This should be the absolute minimum for a CODECOPY approach
+// Since we need 2 bytes at least for CODECOPY + RETURN
+// and 5 bytes for the stack values those consume

@@ -1,0 +1,7 @@
+Flask==2.2.2
+Flask-Limiter==2.6.3
+Flask-SQLAlchemy==2.5.1
+pyppeteer==1.0.2
+redis==4.3.4
+rq==1.11.1
+waitress==2.1.2

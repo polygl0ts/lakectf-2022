@@ -1,0 +1,4 @@
+github.com/ncw/gmp v1.0.4 h1:/f+vRpbpMIqDWfTGqYgCIuhoVfiyVf0ygsnwayqjGwU=
+github.com/ncw/gmp v1.0.4/go.mod h1:cDbCx93DFhzP32H3rnwwt6QnIXNL5wu4jLPCNaExheI=
+github.com/redpwn/pow v0.1.2 h1:nhMynr6goB0peg6ODfttLwS/s6+1cjJHLxBCbUN6IH0=
+github.com/redpwn/pow v0.1.2/go.mod h1:gpuUIZA/5DdaIrWpHVgUg6m4SbsNvYQ0NbPz9RCSXns=

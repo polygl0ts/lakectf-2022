@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<title>CarbonCredit Suisse</title>
+<style>
+  h1 {
+    text-align: center;
+  }
+  p {
+    text-align: center;
+  }
+  div {
+    text-align: center;
+  }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  var access_token = null;
+  $(document).ready(function () {
+    $("#login").click(function (e) {
+      $("#welcome").hide();
+      $("#login_screen").show();
+    });
+    $("#register").click(function (e) {
+      $("#welcome").hide();
+      $("#register_screen").show();
+    });
+    $("#login_form").submit(function (e) {
+      e.preventDefault();
+      $.post(
+        "token",
+        {
+          username: $("#login_username").val(),
+          password: $("#login_password").val(),
+        },
+        function (data, status) {
+          if (status === "success") {
+            access_token = data.access_token;
+          }
+          $("#login_screen").hide();
+          $("#dashboard").show();
+          $.ajax({
+            url: "lines/display",
+            headers: {
+              Authorization: "Bearer " + access_token,
+            },
+            success: function (data, status) {
+              if (status === "success") {
+                $("#dashboard_lines").html(data);
+              }
+            },
+          });
+        }
+      );
+    });
+    $("#dashboard_destroy").click(function (e) {
+      $.ajax({
+        url: "destroy",
+        headers: {
+          Authorization: "Bearer " + access_token,
+        },
+        success: function (data, status) {
+          if (status === "success") {
+            $("#dashboard").hide();
+          }
+        },
+      });
+    });
+  });
+</script>
+<div id="welcome">
+  <h1>🌱 Welcome to CarbonCredit Suisse!</h1>
+  <div>
+    <button id="login" autofocus="true">Log in</button>
+  </div>
+  <div>
+    <button id="register">Register</button>
+  </div>
+</div>
+<div id="login_screen" style="display: none">
+  <form id="login_form" action="token" method="post" name="login_form">
+    <label for="username">Username:</label>
+    <input type="text" id="login_username" name="username" /><br />
+    <br />
+    <label for="password">Password:</label>
+    <input type="password" id="login_password" name="password" /><br />
+    <br />
+    <input type="submit" id="login_submit" value="Log in" />
+  </form>
+</div>
+<div id="register_screen" style="display: none">
+  <form
+    id="register_form"
+    action="register"
+    method="post"
+    name="register_form"
+  >
+    <label for="username">Username:</label>
+    <input type="text" name="username" /><br />
+    <br />
+    <label for="full_name">Full name:</label>
+    <input type="text" name="full_name" /><br />
+    <br />
+    <label for="email">E-mail address:</label>
+    <input type="text" name="email" /><br />
+    <br />
+    <label for="password">Password:</label>
+    <input type="password" name="password" /><br />
+    <br />
+    <input type="submit" id="register_submit" value="Register" />
+  </form>
+</div>
+<div id="dashboard" style="display: none">
+  <h2>Lines</h2>
+  <div id="dashboard_lines"></div>
+  <button id="dashboard_destroy">☢️ Destroy instance ☢️</button>
+</div>

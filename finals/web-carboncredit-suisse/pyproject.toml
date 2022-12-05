@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "carboncredit-suisse"
+version = "0.1.0"
+description = ""
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.9"
+uvicorn = "^0.18.3"
+passlib = "^1.7.4"
+python-jose = "^3.3.0"
+fastapi = "^0.83.0"
+python-multipart = "^0.0.5"
+pydantic = {extras = ["email"], version = "^1.10.2"}
+redis = "^4.3.4"
+rq = "^1.11.0"
+pyppeteer = "^1.0.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

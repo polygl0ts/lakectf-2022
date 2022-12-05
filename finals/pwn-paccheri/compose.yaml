@@ -1,0 +1,19 @@
+services:
+  paccheri-flag:
+    image: pwn-paccheri:flag
+    build:
+      context: .
+      dockerfile: Dockerfile.flag
+    ports:
+      - 127.0.0.1:30022:30022
+      - 3700:1337
+  paccheri-noflag:
+    image: pwn-paccheri:noflag
+    build:
+      context: .
+      dockerfile: Dockerfile.noflag
+    ports:
+      - 127.0.0.1:30023:30022
+      - 1337:1337
+    deploy:
+      replicas: 0 # No container started by default

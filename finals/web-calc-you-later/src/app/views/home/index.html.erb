@@ -1,0 +1,19 @@
+<h1>Hello <%= @user.username %></h1>
+
+<div>
+  <h2>Submit a Calc-You-Lation:</h2>
+  <%= form_with do |form| %>
+    <%= form.text_area :program %>
+    <br />
+    <%= form.submit "Calc-You-Later" %>
+  <% end %>
+</div>
+
+<div>
+  <h2>Latest available results:</h2>
+  <ul>
+    <% @results.first(10).each do |res| %>
+      <li><%= res.result %></li>
+    <% end %>
+  </ul>
+</div>

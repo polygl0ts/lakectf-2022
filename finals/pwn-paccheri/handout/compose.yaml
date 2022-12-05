@@ -1,0 +1,7 @@
+services:
+  paccheri:
+    image: pwn-paccheri:latest
+    build: .
+    ports:
+      - 30022:30022
+      - 3700:1337

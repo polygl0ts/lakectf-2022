@@ -1,0 +1,19 @@
+services:
+  camipral:
+    build: ./source
+    ports:
+      - 34000:5000
+    environment:
+      - JAIL_ENV_FLAG=EPFL{l0v3_7hy_c4m1pr0}
+    read_only: true
+    cap_drop:
+      - all
+    cap_add:
+      - chown
+      - setuid
+      - setgid
+      - sys_admin
+      - mknod
+    security_opt:
+      - apparmor=unconfined
+      - seccomp=unconfined

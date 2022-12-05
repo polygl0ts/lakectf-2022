@@ -1,0 +1,27 @@
+services:
+  redis:
+    image: "redis:6-alpine"
+
+  web:
+    container_name: carboncredit-suisse
+    build:
+      dockerfile: Dockerfile.web
+    depends_on:
+      - redis
+    environment:
+      - FLAG
+      - HASHED_ADMIN_PASSWORD
+    ports:
+      - "4100:8000"
+
+  bot:
+    platform: linux/amd64
+    build:
+      dockerfile: Dockerfile.bot
+    depends_on:
+      - redis
+    environment:
+      - ADMIN_PASSWORD
+    deploy:
+      replicas: 3
+

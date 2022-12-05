@@ -1,0 +1,20 @@
+FROM python:3.9-slim
+
+# Install chromium dependencies
+RUN apt-get update && apt-get install -y $(apt-cache depends chromium | grep Depends | sed -e "s/.*ends:\ //" -e 's/<[^>]*>//' | tr '\n' ' ') libxss1 && rm -rf /var/lib/apt/lists/*
+
+RUN pip install poetry
+
+RUN adduser --system --group bot
+USER bot
+
+WORKDIR /app
+
+COPY poetry.lock pyproject.toml /app
+RUN poetry install --no-root
+
+RUN poetry run pyppeteer-install
+
+COPY src/ /app/carboncredit_suisse/
+
+CMD [ "poetry", "run", "rq", "worker", "--with-scheduler", "--url", "redis://redis:6379"]

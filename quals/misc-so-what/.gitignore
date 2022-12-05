@@ -1,0 +1,6 @@
+libone.so
+libtwo.so
+libyour_input.so
+main
+main.c
+shellcode.s

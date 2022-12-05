@@ -1,0 +1,34 @@
+name: "camipral"
+author: "l3sm4n"
+category: rev
+description: "Check your luck with the Camipral fortune teller from EPFL"
+value: 500
+type: dynamic
+
+extra:
+  initial: 500
+  decay: 8
+  minimum: 50
+
+host: null
+image: ./source/Dockerfile
+
+
+connection_info: nc chall.polygl0ts.ch 34000
+
+healthcheck: source/writeup/exploit.sh
+
+flags:
+  - EPFL{l0v3_7hy_c4m1pr0}
+
+topics:
+  - rust
+  - reverse engineering
+  - integer overflow
+
+tags:
+  - rev
+  - rust
+
+files:
+  - handout/camipral

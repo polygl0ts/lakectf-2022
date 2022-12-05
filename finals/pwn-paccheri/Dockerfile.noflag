@@ -1,0 +1,56 @@
+# syntax=docker/dockerfile:latest
+
+ARG UBUNTU_VERSION=jammy
+
+################################################################################
+# Image downloader                                                             #
+################################################################################
+FROM ubuntu:$UBUNTU_VERSION as downloader
+
+# Enable APT package caching
+RUN rm -f /etc/apt/apt.conf.d/docker-clean && \
+    echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+
+# Install prerequisites
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        wget
+
+# Download the image
+RUN wget -O /noflag-debian-12-arm64.qcow2 --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies 'https://docs.google.com/uc?export=download&id=1raLBohmUyJJ2Wafh9Wmz0tBk6gcNdf1q' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1raLBohmUyJJ2Wafh9Wmz0tBk6gcNdf1q"
+
+################################################################################
+# QEMU runner                                                                  #
+################################################################################
+FROM ubuntu:$UBUNTU_VERSION
+
+# Enable APT package caching
+RUN rm -f /etc/apt/apt.conf.d/docker-clean && \
+    echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+
+# Install prerequisites
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        qemu-system-aarch64 \
+        qemu-efi-aarch64 \
+        ipxe-qemu
+
+# Add image to be booted in QEMU
+COPY --from=downloader --link --chmod=644 /*-debian-12-arm64.qcow2 /.
+
+# SSH port
+EXPOSE 30022
+# Challenge port
+EXPOSE 1337
+
+# The command to run -- basically boot up the VM
+CMD qemu-system-aarch64 -M virt -cpu max -m 1G -smp 4 \
+        -bios /usr/share/qemu-efi-aarch64/QEMU_EFI.fd \
+        -drive if=none,file=/noflag-debian-12-arm64.qcow2,format=qcow2,id=hd0 -device virtio-blk-device,drive=hd0 \
+        -net user,hostfwd=tcp::30022-:22,hostfwd=tcp::1337-:1337 -net nic \
+        -nographic

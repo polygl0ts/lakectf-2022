@@ -1,0 +1,27 @@
+Decoder:
+c - turn counter = 725258376
+resp - result for key = per group
+e - error = 0
+p - p multiplied = 0 
+np - p value of current
+uni - unicode point of char
+prevp - last p value
+pprevp - before last p value
+temp - trash vatriable
+ucount - count the number of _
+ .... values of _ 
+fixed values mem for e/3, n, i
+must_counters
+nX_mem
+
+On put to 1 at every _
+aO checks if on
+cO continues
+FLAGS:
+rX - require a value in value mem if 0 off else is on
+nX - next must be X if 0 is off
+must
+odd/even
+> or <
+== next equal to prev 
+

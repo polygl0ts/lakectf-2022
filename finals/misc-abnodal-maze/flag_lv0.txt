@@ -1,0 +1,3 @@
+EPFL{r3d4c7ed} 
+This would be the flag if you were on level 1
+
