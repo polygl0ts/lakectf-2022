@@ -1,0 +1,4 @@
+gen.py creates both the challenge and a visual image that will be the target. This is done by taking the image in a clockwise spiral fashion, top pixel row, right pixel colomn, bottom pixel row, left pixel column, etc., then encoding each with one of 7 different img formats. Then we concatenate them, while corrupting them by chopping off the last two bytes.
+solve.py produces an image, reversing the scrabling (as best as possible)
+utils.py contains some helper functions and classes used by both.
+my aim was to do an interesting challenge, showing off what image formats exist, whith a slight ctf twist (or should I say spiral?). This was inspired by ncutter, the defcon qual challenge. I hope you enjoy
